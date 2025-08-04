@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>FX Fluctuation Analysis</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-light">
+
+<div class="container mt-5">
+  <h2 class="mb-4">📉 FX Fluctuation Analysis</h2>
+
+  <div class="row mb-3">
+    <div class="col-md-4">
+      <label for="base" class="form-label">Base Currency</label>
+      <select class="form-select" id="base">
+        <option>USD</option>
+        <option>EUR</option>
+        <option>SGD</option>
+      </select>
+    </div>
+    <div class="col-md-8">
+      <label for="symbols" class="form-label">Compare Against (comma-separated)</label>
+      <input type="text" class="form-control" id="symbols" value="SGD,EUR,AUD">
+    </div>
+  </div>
+
+  <button class="btn btn-primary mb-4" onclick="loadFluctuation()">Load Fluctuation</button>
+
+  <canvas id="fluctuationChart" height="100"></canvas>
+</div>
+
+<script>
+function loadFluctuation() {
+  const base = document.getElementById("base").value;
+  const symbols = document.getElementById("symbols").value;
+
+  fetch(`/api/fluctuation_data?base=${base}&symbols=${symbols}`)
+  .then(res => res.json())
+  .then(data => {
+    if (!data || !data.rates) {
+      alert("❌ No fluctuation data found. Try different currencies.");
+      return;
+    }
+
+    const results = [];
+    for (const [currency, stats] of Object.entries(data.rates)) {
+      results.push(`
+        <li><strong>${currency}</strong>: 
+        Change: ${stats.change.toFixed(4)} | 
+        Change %: ${stats.change_pct.toFixed(2)}%</li>
+      `);
+    }
+
+    document.getElementById("results").innerHTML = `<ul>${results.join('')}</ul>`;
+  })
+  .catch(err => {
+    alert("🚫 Failed to load data.");
+    console.error(err);
+  });
+
+</script>
+</body>
+</html>
