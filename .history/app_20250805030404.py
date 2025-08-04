@@ -276,17 +276,11 @@ def get_fx_news():
         return jsonify({"articles": articles})
     except Exception as e:
         return jsonify({"error": str(e)})
-    
-@app.route("/forecast")
-def forecast_page():
-    pairs = get_polygon_fx_pairs()  # Reuse your existing function
-    return render_template("forecast.html", fxPairs=pairs)
-
 @app.route('/api/forecast')
 def forecast_fx():
     pair = request.args.get("pair", "USDSGD")
     days = 30
-    api_key = "Coh8pjpp44y_Bg9NDWTlWQKCPvUcDxQy"  # Replace with your actual key
+    api_key = "YOUR_POLYGON_API_KEY"  # Replace with your actual key
 
     end_date = datetime.today().strftime("%Y-%m-%d")
     start_date = (datetime.today() - timedelta(days=days)).strftime("%Y-%m-%d")

@@ -276,12 +276,6 @@ def get_fx_news():
         return jsonify({"articles": articles})
     except Exception as e:
         return jsonify({"error": str(e)})
-    
-@app.route("/forecast")
-def forecast_page():
-    pairs = get_polygon_fx_pairs()  # Reuse your existing function
-    return render_template("forecast.html", fxPairs=pairs)
-
 @app.route('/api/forecast')
 def forecast_fx():
     pair = request.args.get("pair", "USDSGD")

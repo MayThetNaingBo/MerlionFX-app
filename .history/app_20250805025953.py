@@ -276,52 +276,7 @@ def get_fx_news():
         return jsonify({"articles": articles})
     except Exception as e:
         return jsonify({"error": str(e)})
-    
-@app.route("/forecast")
-def forecast_page():
-    pairs = get_polygon_fx_pairs()  # Reuse your existing function
-    return render_template("forecast.html", fxPairs=pairs)
 
-@app.route('/api/forecast')
-def forecast_fx():
-    pair = request.args.get("pair", "USDSGD")
-    days = 30
-    api_key = "Coh8pjpp44y_Bg9NDWTlWQKCPvUcDxQy"  # Replace with your actual key
-
-    end_date = datetime.today().strftime("%Y-%m-%d")
-    start_date = (datetime.today() - timedelta(days=days)).strftime("%Y-%m-%d")
-
-    url = f"https://api.polygon.io/v2/aggs/ticker/C:{pair}/range/1/day/{start_date}/{end_date}?adjusted=true&sort=asc&limit={days}&apiKey={api_key}"
-
-    try:
-        response = requests.get(url)
-        data = response.json()
-        results = data.get("results", [])
-
-        if not results:
-            return {"error": "No data available for this pair."}, 400
-
-        # Prepare data for ML
-        df = pd.DataFrame(results)
-        df["day"] = np.arange(len(df))  # day 0 to day 29
-        X = df[["day"]]  # features
-        y = df["c"]      # close prices
-
-        model = LinearRegression()
-        model.fit(X, y)
-
-        tomorrow = [[len(df)]]  # day 30
-        predicted = model.predict(tomorrow)[0]
-
-        return {
-            "pair": pair,
-            "predicted_rate": round(predicted, 5),
-            "last_known": round(df['c'].iloc[-1], 5)
-        }
-
-    except Exception as e:
-        print("Forecast error:", e)
-        return {"error": str(e)}, 500
 
 if __name__ == '__main__':
     app.run(debug=True)

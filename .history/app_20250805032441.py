@@ -316,6 +316,11 @@ def forecast_fx():
         return {
             "pair": pair,
             "predicted_rate": round(predicted, 5),
+            return {
+    "predicted_rate": round(predicted_rate, 5),
+    "today_rate": round(y[-1], 5)
+}
+
             "last_known": round(df['c'].iloc[-1], 5)
         }
 

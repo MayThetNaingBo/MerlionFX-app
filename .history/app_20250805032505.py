@@ -316,7 +316,8 @@ def forecast_fx():
         return {
             "pair": pair,
             "predicted_rate": round(predicted, 5),
-            "last_known": round(df['c'].iloc[-1], 5)
+            "today_rate": round(y[-1], 5)
+            
         }
 
     except Exception as e:
