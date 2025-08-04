@@ -257,10 +257,7 @@ def chart_data():
         return {"dates": [], "prices": []}
 
 # ---------------- News Placeholder -----------------
-@app.route("/news")
-def news_page():
-    return render_template("news.html")
-
+    
 @app.route('/api/news')
 def get_fx_news():
     api_key = "44efb3199f64d940271c870c1ac62f72"

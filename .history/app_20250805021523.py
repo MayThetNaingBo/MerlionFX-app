@@ -263,7 +263,7 @@ def news_page():
 
 @app.route('/api/news')
 def get_fx_news():
-    api_key = "44efb3199f64d940271c870c1ac62f72"
+    api_key = ""
     url = f"https://gnews.io/api/v4/search?q=forex OR currency OR exchange&lang=en&token={api_key}"
 
     try:

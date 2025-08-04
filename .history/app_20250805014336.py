@@ -18,7 +18,7 @@ redirect_uri = 'http://127.0.0.1:5000/callback'
 
 # ---------------- Polygon FX -----------------
 def get_polygon_fx_pairs():
-    api_key = "Coh8pjpp44y_Bg9NDWTlWQKCPvUcDxQy"  # Your Polygon.io API key
+    api_key = ""  # Your Polygon.io API key
     base_url = f"https://api.polygon.io/v3/reference/tickers?market=fx&active=true&limit=1000&apiKey={api_key}"
     fx_pairs = []
     try:
@@ -258,24 +258,8 @@ def chart_data():
 
 # ---------------- News Placeholder -----------------
 @app.route("/news")
-def news_page():
+def news():
     return render_template("news.html")
-
-@app.route('/api/news')
-def get_fx_news():
-    api_key = "44efb3199f64d940271c870c1ac62f72"
-    url = f"https://gnews.io/api/v4/search?q=forex OR currency OR exchange&lang=en&token={api_key}"
-
-    try:
-        response = requests.get(url)
-        data = response.json()
-        articles = data.get("articles", [])
-        return jsonify({"articles": articles})
-    except Exception as e:
-        return jsonify({"error": str(e)})
-
 
 if __name__ == '__main__':
     app.run(debug=True)
-
-# api_key = "44efb3199f64d940271c870c1ac62f72"
