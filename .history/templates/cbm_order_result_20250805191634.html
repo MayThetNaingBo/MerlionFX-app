@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Purchase Result</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+  <div class="container mt-5">
+    <div class="card shadow">
+      <div class="card-header bg-success text-white">
+        <h4>✅ Purchase Completed Successfully</h4>
+      </div>
+      <div class="card-body">
+        <p><strong>📄 Order ID:</strong> {{ fOrderID }}</p>
+        <p><strong>💳 Payment Status:</strong> {{ fStatus }}</p>
+        <p><strong>👤 Buyer:</strong> {{ fName }} {{ fSurname }}</p>
+        <p><strong>📧 Email:</strong> {{ fEmail }}</p>
+        <hr>
+        <p><strong>💱 Currency:</strong> {{ fCurrency }}</p>
+        <p><strong>💰 You Received:</strong> {{ fQuantity }}</p>
+        <p><strong>🔁 Rate:</strong> 1 {{ fCurrency }} = {{ fRate }} MMK</p>
+        <p><strong>💵 Paid (SGD):</strong> {{ fAmount }}</p>
+        <p><strong>🧾 PayPal ID:</strong> {{ fPayPalID }}</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

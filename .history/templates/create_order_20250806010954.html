@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Buy FX - Merlion</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+  <!-- Bootstrap JS (for modal) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    $(document).ready(function() {
+      $('#currencySelect').select2({
+        placeholder: "Search currency pair",
+        width: '100%'
+      });
+
+      $('#currencySelect').on('change', function () {
+        const selectedPair = $(this).val();
+        $.get("/get_fx_rate", { pair: selectedPair }, function (data) {
+          if (data.rate) {
+            $('input[name="itemUnitAmount"]').val(data.rate.toFixed(5));
+          } else {
+            alert("Could not fetch FX rate.");
+          }
+        });
+      });
+
+      $('#confirmBtn').on('click', function (e) {
+        e.preventDefault();
+        const unitPrice = parseFloat($('input[name="itemUnitAmount"]').val());
+        const quantity = parseFloat($('input[name="itemQuantity"]').val());
+        const total = (unitPrice * quantity).toFixed(2);
+
+        $('#modalCurrency').text($('#currencySelect option:selected').text());
+        $('#modalQuantity').text(quantity);
+        $('#modalUnitPrice').text(unitPrice.toFixed(5));
+        $('#modalTotal').text(total);
+
+        const myModal = new bootstrap.Modal(document.getElementById('confirmModal'));
+        myModal.show();
+      });
+
+      $('#finalSubmitBtn').on('click', function () {
+        $('#fxForm').submit();
+      });
+    });
+  </script>
+</head>
+
+<body class="bg-light">
+  <div class="container mt-5">
+    
+    <h3 class="mb-4">💶 Buy Foreign Currency</h3>
+    <form method="POST" action="/process_order" id="fxForm">
+      <input type="hidden" name="customerEmailAdd" value="{{ fEmail }}">
+      <input type="hidden" name="invoiceID" value="{{ finvoiceID }}">
+
+      <div class="mb-3">
+        <label class="form-label">💱 <strong>Choose Currency</strong></label>
+        <select class="form-select" id="currencySelect" name="itemName" required>
+          {% for pair in fxPairs %}
+            <option value="{{ pair }}" {% if pair == defaultPair %}selected{% endif %}>
+              {{ pair[:3] }}/{{ pair[3:] }}
+            </option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label"><strong>Unit Price (SGD)</strong></label>
+        <input type="number" step="0.0001" name="itemUnitAmount"
+               class="form-control" required
+               value="{{ defaultRate }}" placeholder="e.g. 1.45">
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label"><strong>Quantity</strong> (Foreign Currency)</label>
+        <input type="number" name="itemQuantity" class="form-control" required placeholder="e.g. 100">
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label"><strong>Description</strong></label>
+        <input type="text" name="itemDescription" class="form-control" placeholder="e.g. Euro for travel">
+      </div>
+
+      <button type="button" class="btn btn-outline-primary" id="confirmBtn">Confirm Payment</button>
+      <br>
+      <br>
+     
+      
+    </form>
+  </div>
+
+  <!-- Confirmation Modal -->
+  <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header bg-primary text-white">
+          <h5 class="modal-title" id="confirmModalLabel">Confirm Your FX Purchase</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p><strong>Currency:</strong> <span id="modalCurrency"></span></p>
+          <p><strong>Quantity:</strong> <span id="modalQuantity"></span></p>
+          <p><strong>Unit Price (SGD):</strong> <span id="modalUnitPrice"></span></p>
+          <hr>
+          <p><strong>Total Amount (SGD):</strong> <span id="modalTotal" class="fw-bold text-success"></span></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-primary" id="finalSubmitBtn">Confirm and Pay</button>
+          
+        </div>
+      </div>
+      
+    </div>
+     <div class="container text-center mt-4">
+  <a href="/services" class="btn btn-outline-primary">Back to Dashboard</a>
+</div>
+  </div>
+  <div class="container text-center ">
+  <a href="/services" class="btn btn-outline-primary">Back to Dashboard</a>
+</div>
+
+</body>
+</html>
