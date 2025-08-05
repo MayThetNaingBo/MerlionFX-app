@@ -340,20 +340,20 @@ import numpy as np
 from sklearn.linear_model import LinearRegression
 
 app = Flask(__name__)
-app.secret_key = ""   # 🔒 Replace with a secure secret
+app.secret_key =   # 🔒 Replace with a secure secret
 
 # 🔑 PayPal OAuth Config
-client_id = ""
-client_secret = ""
+client_id = 
+client_secret = 'EG6vZLYReYRtUJ1tDWmNNhz2OFq5VXYnDquk9nekWjsEJxLBB8_O9CWjqwz69s_T5T5PnSs7_bPLMvGW'
 authorization_base_url = 'https://www.sandbox.paypal.com/signin/authorize?flowEntry=static'
 token_url = 'https://api-m.sandbox.paypal.com/v1/oauth2/token'
 redirect_uri = 'http://127.0.0.1:5000/callback'
 
 # 🔑 Polygon.io API Key
-polygon_key = ""  # Replace with your actual key
+polygon_key = "Coh8pjpp44y_Bg9NDWTlWQKCPvUcDxQy"  # Replace with your actual key
 
 # 🔑 GNews API Key
-gnews_api_key = ""
+gnews_api_key = "44efb3199f64d940271c870c1ac62f72"
 
 
 # 🔍 Utilities

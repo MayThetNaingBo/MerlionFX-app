@@ -353,7 +353,7 @@ redirect_uri = 'http://127.0.0.1:5000/callback'
 polygon_key = ""  # Replace with your actual key
 
 # 🔑 GNews API Key
-gnews_api_key = ""
+gnews_api_key = 
 
 
 # 🔍 Utilities

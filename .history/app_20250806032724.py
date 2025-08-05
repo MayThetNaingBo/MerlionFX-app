@@ -350,10 +350,10 @@ token_url = 'https://api-m.sandbox.paypal.com/v1/oauth2/token'
 redirect_uri = 'http://127.0.0.1:5000/callback'
 
 # 🔑 Polygon.io API Key
-polygon_key = ""  # Replace with your actual key
+polygon_key = "Coh8pjpp44y_Bg9NDWTlWQKCPvUcDxQy"  # Replace with your actual key
 
 # 🔑 GNews API Key
-gnews_api_key = ""
+gnews_api_key = "44efb3199f64d940271c870c1ac62f72"
 
 
 # 🔍 Utilities
