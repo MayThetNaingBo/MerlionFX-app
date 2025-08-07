@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Currency Forecast</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!-- Select2 CSS -->
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+<!-- Select2 JS (after jQuery) -->
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(to right, #f4f6f9, #eef1f6);
+    color: #333;
+  }
+
+  .main-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 40px 30px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+  }
+
+  h3 {
+    font-weight: 700;
+    font-size: 28px;
+    color: #2c3e50;
+    margin-bottom: 20px;
+  }
+
+  label.form-label {
+    font-weight: 600;
+    font-size: 16px;
+    margin-bottom: 8px;
+  }
+
+  select.form-select {
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+
+  select.form-select:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.2);
+    outline: none;
+  }
+
+  #result {
+    margin-top: 30px;
+    background: #f5f9ff;
+    border-left: 5px solid #667eea;
+    border-radius: 12px;
+    padding: 20px 24px;
+  }
+
+  #last, #predicted {
+    font-size: 17px;
+    font-weight: 500;
+  }
+
+  .d-flex.justify-content-between {
+    margin-bottom: 30px;
+  }
+</style>
+
+</head>
+<body class="bg-light">
+
+<div class="container mt-5 mai">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+  <h3 class="mb-0">Currency Forecast ( Tomorrow )</h3>
+  <a href="/services" class="custom-gradient-button">Back to Dashboard</a>
+</div>
+      <div class="mb-4">
+      <label class="form-label"><strong>Choose FX Pair</strong></label>
+        <select class="form-select" id="pair">
+          {% for pair in fxPairs %}
+            <option value="{{ pair }}">{{ pair[:3] }}/{{ pair[3:] }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <button class="custom-gradient-button" onclick="getForecast()">Get Forecast</button>
+
+      <div class="mt-4" id="result" style="display:none;">
+      <p id="last"></p>
+<p id="predicted"></p>
+
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+  $(document).ready(function () {
+    $('#pair').select2({ placeholder: "Search FX pair", width: '100%' });
+  });
+
+  function getForecast() {
+    const pair = $('#pair').val();  // e.g. "AED/AUD"
+      // e.g. AEDAUD
+const base = pair.substring(0, 3);
+const quote = pair.substring(3);
+
+    $.get(`/api/forecast?pair=${pair}`, function (data) {
+      if (data.predicted_rate) {
+        $('#result').show();
+        $('#last').html(`<strong>Last Known Rate:</strong> 1 ${base} = ${data.last_known} ${quote}`);
+        $('#predicted').html(`<strong>Predicted Rate (Tomorrow):</strong> 1 ${base} = ${data.predicted_rate} ${quote}`);
+      } else {
+        alert("⚠️ Failed to fetch forecast.");
+      }
+    });
+  }
+</script>
+
+</script>
+
+
+</body>
+</html>
