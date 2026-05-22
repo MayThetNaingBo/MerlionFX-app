@@ -19,6 +19,14 @@ After login, the dashboard displays:
 - PayPal payer ID
 - PayPal balance
 
+## PayPal Sandbox Testing
+
+This project uses PayPal Sandbox for login and payment testing.
+
+To test the PayPal features, please use your own PayPal Sandbox personal account from the PayPal Developer Dashboard.
+
+For demo access, please contact the project owner.
+
 ---
 
 ### 2. FX Trend Chart
@@ -121,3 +129,19 @@ merlion_fx_app/
 │   ├── js/
 │   └── images/
 └── README.md
+
+How to Run the Project
+======================
+
+1. Open the project folder in VS Code.
+
+2. Run these commands:
+
+python -m venv venv
+venv\Scripts\activate
+pip install flask requests requests-oauthlib numpy scikit-learn python-dotenv
+python app.py
+
+3. Open this URL in your browser:
+
+http://127.0.0.1:5000
