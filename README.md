@@ -1,147 +1,234 @@
-# Merlion FX App
+# MerlionFX
 
-Merlion FX App is a Flask-based foreign exchange web application that allows users to view currency exchange rates, check forex trends, read latest FX news, convert MMK using Central Bank of Myanmar exchange rates, forecast currency movement, and make sandbox payments through PayPal.
+MerlionFX is a Flask-based foreign exchange analytics platform that provides real-time currency information, market trends, exchange rate conversion, financial news aggregation, predictive forecasting, and payment simulation capabilities.
 
-This project was developed as a web application project to demonstrate API integration, payment processing, currency conversion, chart visualization, and simple machine learning prediction.
-
----
+The platform integrates multiple financial data sources to help users monitor foreign exchange markets, analyze currency trends, convert currencies, and explore future exchange rate predictions through machine learning techniques.
 
 ## Features
 
-### 1. PayPal Sandbox Login
+### Real-Time FX Market Data
 
-Users can log in using PayPal Sandbox OAuth authentication.
+- View live foreign exchange rates
+- Select and compare currency pairs
+- Monitor market movements
+- Analyze historical exchange rate trends
 
-After login, the dashboard displays:
+### Interactive FX Charts
 
-- User name
-- Email address
-- PayPal payer ID
-- PayPal balance
+- Dynamic exchange rate visualization
+- Multiple time range selection
+- Historical trend analysis
+- Interactive Chart.js dashboard
 
-## PayPal Sandbox Testing
+### Financial News Feed
 
-This project uses PayPal Sandbox for login and payment testing.
+- Latest foreign exchange news
+- Market-related updates
+- News aggregation from external sources
+- Direct links to full articles
 
-To test the PayPal features, please use your own PayPal Sandbox personal account from the PayPal Developer Dashboard.
+### Currency Conversion
 
-For demo access, please contact the project owner.
+- Real-time exchange rate conversion
+- MMK conversion support
+- Central Bank of Myanmar exchange rates
+- Multi-currency calculations
 
----
+### Payment Simulation
 
-### 2. FX Trend Chart
+- PayPal Sandbox integration
+- Simulated FX purchase workflow
+- Payment result verification
+- Transaction testing environment
 
-The dashboard includes an FX trend chart where users can:
+### Currency Forecasting
 
-- Select an FX currency pair
-- View exchange rate trends
-- Choose different time ranges such as 1 day, 7 days, or 30 days
+- Historical data analysis
+- Linear Regression prediction model
+- Future exchange rate estimation
+- Basic machine learning implementation
 
-The chart is displayed using Chart.js.
+## Tech Stack
 
----
+### Backend
 
-### 3. Latest FX News
+* Python
+* Flask
 
-The dashboard displays the latest foreign exchange news.
+### Frontend
 
-Each news item includes:
+* HTML5
+* CSS3
+* JavaScript
+* Bootstrap
+* jQuery
+* Select2
 
-- News image
-- News title
-- Short description
-- Read more button
+### Data Visualization
 
----
+* Chart.js
 
-### 4. Buy FX Currency
+### APIs & Services
 
-Users can simulate buying FX currency through PayPal Sandbox checkout.
+* PayPal Sandbox API
+* Polygon.io API
+* GNews API
+* Central Bank of Myanmar API
 
-The app allows users to:
+### Machine Learning
 
-- Select a currency pair
-- View the current exchange rate
-- Enter quantity
-- Create a PayPal Sandbox order
-- Complete sandbox payment
-- View payment result
+* NumPy
+* Scikit-Learn
+* Linear Regression
 
----
 
-### 5. MMK Converter
+## Screenshots
 
-The MMK Converter uses the Central Bank of Myanmar exchange rate API.
+### Home
+![Home](./screenshots/home.png)
 
-Users can:
+### Dashboard
+![Dashboard](./screenshots/dashboard.png)
 
-- Enter MMK amount
-- Convert MMK to SGD
-- Proceed with PayPal Sandbox payment
+### Buy FX Currency
+![Buy FX Currency](./screenshots/buy-fx.png)
 
----
+### Currency Converter
+![MMK Currency Converter](./screenshots/mmk-converter.png)
 
-### 6. Currency Forecast
+### Currency Forecast
+![Forecast](./screenshots/currency-forecast.png)
 
-The Currency Forecast feature predicts the next exchange rate using simple Linear Regression.
 
-It uses historical FX data and displays:
+## Demo
 
-- Last known exchange rate
-- Predicted next exchange rate
+![MerlionFX Demo](./screenshots/demo.gif)
 
----
+## PayPal Sandbox Setup
 
-## Technologies Used
+This project uses **PayPal Sandbox** for payment testing.  
+Sandbox payments do not use real money.
 
-- Python
-- Flask
-- HTML
-- CSS
-- JavaScript
-- Bootstrap
-- jQuery
-- Select2
-- Chart.js
-- PayPal Sandbox API
-- Polygon.io API
-- GNews API
-- Central Bank of Myanmar API
-- NumPy
-- scikit-learn
+To test the payment feature, you need a PayPal Developer account.
 
----
+### Steps
 
-## Project Structure
+1. Go to the PayPal Developer Dashboard.
+2. Log in with your PayPal account.
+3. Create or use a Sandbox Business account.
+4. Copy the Sandbox API credentials:
+   - Client ID
+   - Secret
+5. Add them to your `.env` file:
+
+### Environment Variables
+
+Copy `.env.example` to `.env` and fill in your own values.
+
+
+## Installation
+
+### Clone Repository
 
 ```bash
-merlion_fx_app/
-├── app.py
-├── templates/
-│   ├── index.html
-│   ├── services.html
-│   ├── create_order.html
-│   ├── cbm.html
-│   ├── forecast.html
-│   └── order_result.html
-├── static/
-│   ├── css/
-│   ├── js/
-│   └── images/
-└── README.md
+git clone https://github.com/MayThetNaingBo/MerlionFX-app.git
+cd merlionfx
+```
 
-How to Run the Project
-======================
+### Create Virtual Environment
 
-1. Open the project folder in VS Code.
-
-2. Run these commands:
-
+```bash
 python -m venv venv
+```
+
+Activate:
+
+Windows:
+
+```bash
 venv\Scripts\activate
-pip install flask requests requests-oauthlib numpy scikit-learn python-dotenv
+```
+
+### Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+
+### Run Application
+
+```bash
 python app.py
+```
 
-3. Open this URL in your browser:
+Application:
 
-http://127.0.0.1:5000
+```text
+http://localhost:5000
+```
+
+
+### Dashboard
+
+Provides:
+
+* FX market overview
+* Currency pair selection
+* Market information
+
+### Trend Analysis
+
+Provides:
+
+* Historical exchange rates
+* Interactive charts
+* Multi-range trend visualization
+
+### FX News
+
+Provides:
+
+* Latest forex news
+* Market updates
+* External article links
+
+### MMK Converter
+
+Provides:
+
+* MMK conversions
+* Central Bank exchange rates
+* Currency calculations
+
+
+## How It Works
+
+1. User accesses dashboard.
+2. Application retrieves market data from APIs.
+3. User selects a currency pair.
+4. Historical rates are displayed using Chart.js.
+5. User can convert currencies.
+6. User can view latest FX news.
+7. Forecast engine analyzes historical rates.
+8. Linear Regression predicts future movement.
+9. User may simulate payment using PayPal Sandbox.
+
+## What I have learnt
+
+* Building web applications using Flask
+* Working with REST APIs
+* Processing financial market data
+* Implementing currency conversion systems
+* Integrating PayPal Sandbox payments
+* Visualizing data using Chart.js
+* Using machine learning for forecasting
+* Handling real-time financial information
+* Structuring full-stack Python applications
+
+
+## Author
+
+May Thet Naing Bo
+
+Software Developer focused on Full-Stack Development, DevOps, Cloud Technologies, and AI-powered Applications.
