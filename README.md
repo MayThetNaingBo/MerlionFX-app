@@ -4,6 +4,10 @@ MerlionFX is a Flask-based foreign exchange analytics platform that provides rea
 
 The platform integrates multiple financial data sources to help users monitor foreign exchange markets, analyze currency trends, convert currencies, and explore future exchange rate predictions through machine learning techniques.
 
+> Note:
+> The public live demo is a deployment-ready version focused on core FX analytics functionality.
+> The GitHub repository contains the complete development version, including PayPal Sandbox payment integration and additional experimental features.
+
 ## Features
 
 ### Real-Time FX Market Data
@@ -81,9 +85,7 @@ The platform integrates multiple financial data sources to help users monitor fo
 * Scikit-Learn
 * Linear Regression
 
-> Note:
-> The public live demo is a deployment-ready version focused on core FX analytics functionality.
-> The GitHub repository contains the complete development version, including PayPal Sandbox payment integration and additional experimental features.
+
 
 ## Screenshots
 
