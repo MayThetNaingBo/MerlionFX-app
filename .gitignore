@@ -1,8 +1,5 @@
-venv/
-__pycache__/
-*.pyc
-.env
-instance/
-.DS_Store
-.vscode/
-.history/
+Add-Content .gitignore "`n.env"
+Add-Content .gitignore ".history/"
+Add-Content .gitignore "venv/"
+Add-Content .gitignore "__pycache__/"
+Add-Content .gitignore "*.pyc"
