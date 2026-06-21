@@ -81,6 +81,9 @@ The platform integrates multiple financial data sources to help users monitor fo
 * Scikit-Learn
 * Linear Regression
 
+> Note:
+> The public live demo is a deployment-ready version focused on core FX analytics functionality.
+> The GitHub repository contains the complete development version, including PayPal Sandbox payment integration and additional experimental features.
 
 ## Screenshots
 
@@ -226,9 +229,6 @@ Provides:
 * Handling real-time financial information
 * Structuring full-stack Python applications
 
-> Note:
-> The public live demo is a deployment-ready version focused on core FX analytics functionality.
-> The GitHub repository contains the complete development version, including PayPal Sandbox payment integration and additional experimental features.
 
 ## Author
 
